@@ -1,11 +1,11 @@
 ---
-title: ILAB TEMPLATE - Data Science
-purpose: Template for python projects tailored to scientific applications (e.g., machine learning)
+title: CHM_DINOv3 - Data Science Group
+purpose: Notebook-based fine-tuning a CHM DINOv3 model (satellite-large, 300M parameter) based on SR-lite images (NRG bands used) and G-LiHT CHM
 ---
 
-# ilab-template-python-data-science
+# CHM_DINOv3
 
-Template for python projects tailored to scientific applications (e.g., machine learning)
+Repo for Files associated with DINOv3 CHM fine-tuning
 
 ## Objectives
 
@@ -13,7 +13,7 @@ Template for python projects tailored to scientific applications (e.g., machine 
 
 ## Containers
 
-### TBD 
+### Notebook runs on DEV kernel
 
 ## Quickstart
 
@@ -21,12 +21,12 @@ Template for python projects tailored to scientific applications (e.g., machine 
 
 ## Dataset Generation and Training
 
-### TBD
+### Notebooks 1-chips_to_include identifies the chips to use in the training (and can filter based on geolocation and statistical metrics) and creates a CSV to pass to 2-create_dataset which makes a huggingface dataset of the images and labels and calculates the mean & std of the channels
 
 ## Full Data Pipeline Command
 
-### TBD
+### 0_Dinov3_Model is the entire command to process the data, create preview visualizations, train model, evaluate performance, and inference on SR-lite raster files
 
 ## Contributors
 
-### TBD
+### Melanie Frost, Paul Montesano, Matt MacCander, JJ Frost
