@@ -9,7 +9,7 @@ Repo for Files associated with DINOv3 CHM fine-tuning
 
 ## Objectives
 
-- Establish common structure for similar ILAB projects
+- Test DINOv3 foundation model for earth-observing satellite imagery. Apply model to Alaska's taiga-tundra ecotone
 
 ## Containers
 
