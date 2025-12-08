@@ -13,9 +13,9 @@ Each chip has CRS: EPSG:3338 (Alaska Albers) and is 128m x 128m, wich each pixel
 
 - Chips where all the CHM pixels = 0 were removed from the dataset (70,836 chips), leaving 428,448 remaining for analysis.
 - From the SRLite imagery, NIR, Red, and Green Bands were extracted. To remove outliers, the minimum value for each band was set as 0 and the maxium set to the mean + 3 std div was set as the maxium:
-========================================================================================================================
+------------------------------------------------------------------------------------------------------------------------
 DETAILED CHANNEL STATISTICS
-========================================================================================================================
+------------------------------------------------------------------------------------------------------------------------
 Channel      Min          1%           2%           Median       Mean         97%          98%          99%          Max          Std Dev      Mean + 3 Std
 ------------------------------------------------------------------------------------------------------------------------
 Channel 0    -10981.0     38.0         103.0        390.0        881.1        6976.0       6976.0       8419.0       14471.0      1599.9      5680.7      
