@@ -17,7 +17,9 @@ Repo for Files associated with DINOv3 CHM fine-tuning
 
 ## Quickstart
 
-### TBD
+- 2 methods:
+- 1) Have a 2 directory of images and labels, with chips that have matching names and sizes in each directory. From here can directly run "3_DINOv3_fulldataset.ipynb"
+  2) Have a huggingface dataset (or create one with "1_chips_to_include.ipynb" and "2_create_dataset.ipynb") then run "3_DINOv3_huggingface.ipynb"
 
 ## Dataset Generation and Training
 
