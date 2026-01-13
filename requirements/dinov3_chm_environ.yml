@@ -1,0 +1,38 @@
+name: geospatial-ml
+channels:
+  - conda-forge
+  - pytorch
+  - defaults
+dependencies:
+  # Python version
+  - python=3.10
+  
+  # Core scientific computing
+  - numpy
+  - pandas
+  
+  # Geospatial libraries
+  - rasterio
+  - gdal
+  
+  # Deep learning - PyTorch
+  - pytorch
+  - torchvision
+  - pytorch-cuda=11.8  # Change to pytorch-cuda=12.1 or cpuonly if needed
+  
+  # Image processing
+  - pillow
+  
+  # Visualization
+  - matplotlib
+  
+  # Progress bars
+  - tqdm
+  
+  # Pip packages (not available in conda or better via pip)
+  - pip
+  - pip:
+    - tiler
+    - transformers
+    - datasets
+    - plotnine
