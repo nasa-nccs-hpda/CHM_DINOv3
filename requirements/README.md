@@ -1,20 +1,38 @@
-
-# ilab-template-python-data-science/requirements directory
-
-Template for python projects tailored to scientific applications (e.g., machine learning) - requirements directory
-
-## Objectives
-
-- Directory for application requirements and dependencies
-- Directory to store Dockerfile's to build the application container
-
-## Files Summary
-
-These Dockerfiles get deployed via GitHub Actions. The production container
-gets deployed when a release is produced. The development container gets built
-when a change is done to the develop branch. You can change this behavior by
-making changes to the GitHub Actions file 'dockerhub.yml'.
-
-- Dockerfile: production container
-- Dockerfile.dev: devepment container
-- requirements.txt: packagages needed to deploy this problem to a notebook environment
+name: geospatial-ml
+channels:
+  - conda-forge
+  - pytorch
+  - defaults
+dependencies:
+  # Python version
+  - python=3.10
+  
+  # Core scientific computing
+  - numpy
+  - pandas
+  
+  # Geospatial libraries
+  - rasterio
+  - gdal
+  
+  # Deep learning - PyTorch
+  - pytorch
+  - torchvision
+  - pytorch-cuda=11.8  # Change to pytorch-cuda=12.1 or cpuonly if needed
+  
+  # Image processing
+  - pillow
+  
+  # Visualization
+  - matplotlib
+  
+  # Progress bars
+  - tqdm
+  
+  # Pip packages (not available in conda or better via pip)
+  - pip
+  - pip:
+    - tiler
+    - transformers
+    - datasets
+    - plotnine
