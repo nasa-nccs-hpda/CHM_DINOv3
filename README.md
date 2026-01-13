@@ -19,7 +19,11 @@ Repo for Files associated with DINOv3 CHM fine-tuning
 
 - 2 methods:
 - 1) Have a 2 directory of images and labels, with chips that have matching names and sizes in each directory. From here can directly run "DINOv3_CHM.ipynb"
-  2) Have a huggingface dataset and alter
+  2) Have a huggingface dataset and load using: 
+
+Load dataset using configuration
+dataset_path = f"{DATA_CONFIG['base_path']}{DATA_CONFIG['data_name']}_dataset"
+dataset = load_from_disk(dataset_path)
 
 ## Dataset Generation and Training
 
@@ -38,11 +42,21 @@ The CHM and SR images were matched by time and geography, then patched into 64x6
 Computer vision models typically z-score normalize input images before training; we used the calculated band means and standard deviations because remote sensing bands have different distributions than web images. Finally, in early iteration NIR-red-green bands predicted as well as all four bands in the model, so we dropped the blue band to save on dataset and compute in the final versions of the model training. To facilitate early development, we made a few subsamples of the dataset for model testing, including lidar CHM- and SAR CHM-only datasets and sample sizes of 10,000, 50,000, and 100,000 pairs and the full dataset. The smaller datasets allowed us to rapidly test model structure, hyperparameters, and loss functions.
 
 
+## Full Model
 
-## Full Data Pipeline Command
+Link to Meta's official DINOv3 release: https://ai.meta.com/dinov3/
 
-### 0_Dinov3_Model is the entire command to process the data, create preview visualizations, train model, evaluate performance, and inference on SR-lite raster files
+### Dinov3_CHM.ipynb is the entire command to z-score normalize, create preview visualizations, train model, evaluate performance, and inference on SR-images
+
+Some of the model training structures remained stable throughout the building process. Early on we decided to run for 100 epochs with early stopping if there was no improvement in the loss function after 10 epochs. For the initial patch embeddings, we duplicated the red band’s embeddings for the NIR band. Training the 7B-parameter model caused the V100s to run out of memory, so we proceeded with using the 300M “large” model as a frozen backbone and only fine-tuned with our datasets instead of re-training the whole model. 
+Among the most consequential adaptations was going from a relatively modest depth decoder with four progressive channel reduction layers, to including a more robust decoder including leaky ReLU layers, dropouts, batch norm, skip connections, and channel attention in later layers. We found that these additions helped to reduce overfitting, make the model more generalizable over the various biomes in Alaska, and better able to detect fine details in vegetation height. The training notebook can be downloaded from the public github repository: https://github.com/nasa-nccs-hpda/CHM_DINOv3 
+We evaluated the learning rate performance by comparing the training and validation losses for each epoch. The final learning rate configuration started at 5e-5 and updated using a learning rate scheduler with the AdamW optimizer.
+Because the study area’s vegetation height was predominantly short shrubs or barren land, the underlying data was highly skewed, and the models tended to underestimate the small number of tall trees in the study area. In addition to these architecture refinements, three more adjustments helped the model to discern taller trees while still detecting realistic canopy height variability of short shrubs:
+•	an asymmetric mean-squared-error loss function that penalized underestimation by a factor of 3
+•	including more data (the full dataset predicted taller trees better than early training runs of 10k – 100k image-CHM pairs)
+•	setting the initial output layer to the 90th percentile of CHM datapoints (8.42m).
+The final major deviation from the standard DINOv3 model was to maintain the original 64x64 size throughout, instead of resizing to the expected 224x224 size. This had multiple advantages, including greatly reducing computational memory requirements and preserving detail for the prediction. The final model training run including all the chips took approximately 11 hours for 47 epochs on the 4 GPUs. 
 
 ## Contributors
 
-### Melanie Frost, Paul Montesano, Matt MacCander, JJ Frost
+### Melanie Frost, Paul Montesano, Matt MacCander, Jordan Caraballo-Vega, JJ Frost
