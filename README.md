@@ -19,11 +19,9 @@ Repo for files associated with DINOv3 CHM fine-tuning
 
 2 Data Structures:
   1) Have a 2 directory of images and labels, with chips that have matching names and sizes in each directory. From here can directly run "DINOv3_CHM.ipynb"
-  2) Have a huggingface dataset and load using: 
-
-Load dataset using configuration
-dataset_path = f"{DATA_CONFIG['base_path']}{DATA_CONFIG['data_name']}_dataset"
-dataset = load_from_disk(dataset_path)
+  2) Have a huggingface dataset and load using:
+     from datasets import load_dataset, load_from_disk
+     dataset = load_from_disk("/filepath")
 
 ## Dataset Generation and Training
 
