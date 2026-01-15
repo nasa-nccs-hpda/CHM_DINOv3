@@ -17,8 +17,8 @@ Repo for Files associated with DINOv3 CHM fine-tuning
 
 ## Quickstart
 
-- 2 methods:
-- 1) Have a 2 directory of images and labels, with chips that have matching names and sizes in each directory. From here can directly run "DINOv3_CHM.ipynb"
+2 Data Structures:
+  1) Have a 2 directory of images and labels, with chips that have matching names and sizes in each directory. From here can directly run "DINOv3_CHM.ipynb"
   2) Have a huggingface dataset and load using: 
 
 Load dataset using configuration
@@ -30,6 +30,11 @@ dataset = load_from_disk(dataset_path)
 ### 
 
 a. Datset generation
+
+Recommend: Preprocess data by running image data through https://github.com/nasa-nccs-hpda/srlite process, then scale data to 0-1 while removing outliers and record global mean and std dev statistics. Ours were:
+Mean values per channel (NIR, Red, Green): [0.34176117 0.08127703 0.10034456]
+Standard deviation per channel (NIR, Red, Green): [0.13601232 0.04182002 0.03420006]
+
 Our dataset consisted of 499,284 pairs of 4-band (near-infrared [NIR], red, green, and blue) image and gridded vegetation height (CHM) chips in Alaska from the years 2011-2022, both stored as arrays. Alaska’s biomes fall in the boreal-tundra gradient, and each image chip generally shows one of the following categories:  tundra, sparse woody vegetation, dense woody vegetation, and mixed vegeatation. The vegetation height chips were gridded height estimates collected from Goddard LiDAR, Hyperspectral, and Thermal Imager (G-LiHT) Light Detection and Ranging (lidar) and United States Geological Survey (USGS)’s Interferometric Synthetic Aperture Radar (SAR) databases. 
 
 <img width="524" height="362" alt="image" src="https://github.com/user-attachments/assets/b73c2edc-8bba-4bd3-a2a1-2c547d2d6b32" />
