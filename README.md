@@ -59,4 +59,4 @@ The final major deviation from the standard DINOv3 model was to maintain the ori
 
 ## Contributors
 
-### Melanie Frost, Paul Montesano, Matt MacCander, Jordan Caraballo-Vega, JJ Frost
+### Melanie Frost, Paul Montesano, Matt Macander, Jordan Caraballo-Vega, JJ Frost
