@@ -5,7 +5,7 @@ purpose: Notebook-based fine-tuning a CHM DINOv3 model (satellite-large, 300M pa
 
 # CHM_DINOv3
 
-Repo for Files associated with DINOv3 CHM fine-tuning
+Repo for files associated with DINOv3 CHM fine-tuning
 
 ## Objectives
 
@@ -34,6 +34,7 @@ a. Datset generation
 Recommend: Preprocess data by running image data through https://github.com/nasa-nccs-hpda/srlite process, then scale data to 0-1 while removing outliers and record global mean and std dev statistics. Ours were:
 Mean values per channel (NIR, Red, Green): [0.34176117 0.08127703 0.10034456]
 Standard deviation per channel (NIR, Red, Green): [0.13601232 0.04182002 0.03420006]
+create_dataset.ipynb in "notebooks" has more information
 
 Our dataset consisted of 499,284 pairs of 4-band (near-infrared [NIR], red, green, and blue) image and gridded vegetation height (CHM) chips in Alaska from the years 2011-2022, both stored as arrays. Alaska’s biomes fall in the boreal-tundra gradient, and each image chip generally shows one of the following categories:  tundra, sparse woody vegetation, dense woody vegetation, and mixed vegeatation. The vegetation height chips were gridded height estimates collected from Goddard LiDAR, Hyperspectral, and Thermal Imager (G-LiHT) Light Detection and Ranging (lidar) and United States Geological Survey (USGS)’s Interferometric Synthetic Aperture Radar (SAR) databases. 
 
